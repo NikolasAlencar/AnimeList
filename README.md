@@ -1,3 +1,5 @@
+# Esse é um projeto simples criado com o intuito de aplicar as novas features lançadas no Angular 17 😀
+
 # AnimeList
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.10.
