@@ -1,0 +1,15 @@
+.example-full-width {
+  max-width: 500px;
+  width: 100%;
+}
+
+mat-toolbar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title{
+  margin-left: 1rem;
+}
+

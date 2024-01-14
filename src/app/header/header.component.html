@@ -1,0 +1,39 @@
+<mat-toolbar color="primary">
+  <span class="title">AnimeList</span>
+  <span class="example-spacer"></span>
+
+  <mat-form-field
+    appearance="outline"
+    class="example-full-width"
+    subscriptSizing="dynamic">
+    <mat-label>Procure por um anime</mat-label>
+    <input
+      type="text"
+      placeholder="Digite o nome do anime desejado"
+      aria-label="Procure por um anime"
+      matInput
+      [formControl]="myControl"
+      [matAutocomplete]="auto" />
+    <mat-icon matSuffix>find_replace</mat-icon>
+    <mat-autocomplete #auto="matAutocomplete">
+      @for (option of filteredOptions | async; track option) {
+        <mat-option [value]="option">{{ option }}</mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <div>
+    <button
+      mat-icon-button
+      class="example-icon home-icon"
+      aria-label="Example icon-button with heart icon">
+      <mat-icon>home</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with favorite icon">
+      <mat-icon>favorite</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
