@@ -21,7 +21,6 @@ export class AnimesService {
       )
       .pipe(map(res => res.data))
       .subscribe(animes => this.animes.set(animes))
-      .unsubscribe();
   }
 
   getAnimes = () => this.animes.asReadonly();

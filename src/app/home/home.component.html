@@ -1,3 +1,40 @@
-<mat-card>
-  {{ animes() | json }}
-</mat-card>
+<div
+  class="primary"
+  [ngStyle]="{
+    'padding-left.px': screenWidth,
+    'padding-right.px': screenWidth
+  }">
+  <div class="header">
+    <h1>Animes</h1>
+    <span class="itens">
+      <span class="item">
+        <mat-icon matSuffix>filter_list</mat-icon>Mais Populares
+      </span>
+      <span class="item">
+        <mat-icon matSuffix>filter_alt</mat-icon>Filtrar
+      </span>
+    </span>
+  </div>
+
+  <div class="container">
+    <h2>Populares</h2>
+    <mat-grid-list [cols]="innerWidth" rowHeight="22rem">
+      @for (anime of animes(); track anime) {
+        <mat-grid-tile>
+          @defer {
+            <img
+              class="img"
+              loading="lazy"
+              [src]="anime.attributes.posterImage.large" />
+          } @placeholder {
+            A imagem será carregada em breve...
+          } @loading (minimum 2000ms){
+            <app-loader class="img" style="display: flex;"></app-loader>
+          }
+          <p class="name">{{ anime.attributes.titles.en }}</p>
+          <p class="dub">Dub | Leg</p>
+        </mat-grid-tile>
+      }
+    </mat-grid-list>
+  </div>
+</div>
