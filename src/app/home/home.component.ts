@@ -1,9 +1,7 @@
 import {
   Component,
-  ElementRef,
   HostListener,
   OnInit,
-  ViewChild,
   afterNextRender,
   inject,
 } from '@angular/core';
@@ -30,9 +28,8 @@ export class HomeComponent implements OnInit {
   animesService = inject(AnimesService);
   animes = this.animesService.getAnimes();
 
-  screenWidth = 100;
+  screenWidth!: number;
   innerWidth!: number;
-  @ViewChild('content') contentRef!: ElementRef;
 
   ngOnInit(): void {
     this.animesService.getAnimesByPage(0);
