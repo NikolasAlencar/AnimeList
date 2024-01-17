@@ -1,8 +1,8 @@
 <div
   class="primary"
   [ngStyle]="{
-    'padding-left.px': screenWidth,
-    'padding-right.px': screenWidth
+    'padding-left.px': screenWidth(),
+    'padding-right.px': screenWidth()
   }">
   <div class="header">
     <h1>Animes</h1>
@@ -18,7 +18,7 @@
 
   <div class="container">
     <h2>Populares</h2>
-    <mat-grid-list [cols]="innerWidth" rowHeight="22rem">
+    <mat-grid-list [cols]="innerWidth()" rowHeight="22rem">
       @for (anime of animes(); track anime) {
         <mat-grid-tile>
           @defer {
@@ -28,8 +28,9 @@
               [src]="anime.attributes.posterImage.large" />
           } @placeholder {
             A imagem será carregada em breve...
-          } @loading (minimum 2000ms){
-            <app-loader class="img" style="display: flex;"></app-loader>
+          } @loading (minimum 1500ms){
+            <app-skeleton></app-skeleton>
+            <!-- <app-loader class="img" style="display: flex;"></app-loader> -->
           }
           <p class="name">{{ anime.attributes.titles.en }}</p>
           <p class="dub">Dub | Leg</p>

@@ -8,3 +8,16 @@ body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+
+::-webkit-scrollbar {
+  width: 0.3rem;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(143, 143, 143, 0.274);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 148, 148, 0.74);
+  border-radius: 10px;
+}
