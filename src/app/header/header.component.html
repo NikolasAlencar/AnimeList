@@ -16,7 +16,7 @@
       [matAutocomplete]="auto" />
     <mat-icon matSuffix>find_replace</mat-icon>
     <mat-autocomplete #auto="matAutocomplete">
-      @for (option of filteredOptions | async; track option) {
+      @for (option of options(); track option) {
         <mat-option [value]="getNameOfAnime(option)">{{ getNameOfAnime(option) }}</mat-option>
       }
     </mat-autocomplete>

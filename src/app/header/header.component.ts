@@ -1,17 +1,16 @@
-import {Component, OnInit, Signal, inject} from '@angular/core';
-import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-import {AsyncPipe} from '@angular/common';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { Component, OnInit, Signal, inject } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, startWith } from 'rxjs/operators';
+import { AsyncPipe } from '@angular/common';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { AnimesService } from '../services/animes.service';
 import { Anime } from '../services/models/Response';
-
+import { getNameOfAnime } from '../../assets/util/GetNameOfAnime';
 
 @Component({
   selector: 'app-header',
@@ -25,30 +24,23 @@ import { Anime } from '../services/models/Response';
     AsyncPipe,
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent implements OnInit{
-
-  service = inject(AnimesService)
+export class HeaderComponent implements OnInit {
+  service = inject(AnimesService);
   myControl = new FormControl('');
-  options: Signal<Anime[]> = this.service.getAnimes();
-  filteredOptions!: Observable<Anime[]>;
+  options: Signal<Anime[]> = this.service.getFindAnimes();
 
   ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value || '')),
-    );
+    this.myControl.valueChanges
+      .pipe(startWith(''), distinctUntilChanged(), debounceTime(700))
+      .subscribe(valueInput =>
+        this.service.getAnimesByName(valueInput as string)
+      );
   }
 
-  private _filter(value: string): Anime[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options().filter(option => option.attributes.titles.en?.toLowerCase().includes(filterValue));
-  }
-
-  getNameOfAnime = (anime: Anime) => anime.attributes.titles.en;
+  getNameOfAnime = (anime: Anime) => getNameOfAnime(anime);
 }

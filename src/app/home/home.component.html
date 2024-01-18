@@ -30,9 +30,8 @@
             A imagem será carregada em breve...
           } @loading (minimum 1500ms){
             <app-skeleton></app-skeleton>
-            <!-- <app-loader class="img" style="display: flex;"></app-loader> -->
           }
-          <p class="name">{{ anime.attributes.titles.en }}</p>
+          <p class="name">{{ getNameOfAnime(anime) }}</p>
           <p class="dub">Dub | Leg</p>
         </mat-grid-tile>
       }

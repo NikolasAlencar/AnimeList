@@ -1,7 +1,6 @@
 import {
   Component,
   HostListener,
-  OnInit,
   afterNextRender,
   inject,
   signal,
@@ -12,8 +11,9 @@ import { JsonPipe, NgStyle } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ajustaGrid } from '../../assets/util/AjustaGrid';
-import { LoaderComponent } from '../components/loader/loader.component';
 import { SkeletonComponent } from '../components/skeleton/skeleton.component';
+import { Anime } from '../services/models/Response';
+import { getNameOfAnime } from '../../assets/util/GetNameOfAnime';
 
 @Component({
   selector: 'app-home',
@@ -26,13 +26,13 @@ import { SkeletonComponent } from '../components/skeleton/skeleton.component';
     NgStyle,
     MatIconModule,
     MatGridListModule,
-    LoaderComponent,
-    SkeletonComponent
+    SkeletonComponent,
   ],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   constructor() {
     afterNextRender(() => this.onWindowResize());
+    this.animesService.getAnimesByPage(0);
   }
 
   animesService = inject(AnimesService);
@@ -41,9 +41,7 @@ export class HomeComponent implements OnInit {
   screenWidth = signal(0);
   innerWidth = signal(0);
 
-  ngOnInit(): void {
-    this.animesService.getAnimesByPage(0);
-  }
+  getNameOfAnime = (anime: Anime) => getNameOfAnime(anime);
 
   @HostListener('window:resize', ['$event'])
   onWindowResize() {

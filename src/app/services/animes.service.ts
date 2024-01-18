@@ -13,6 +13,7 @@ export class AnimesService {
   BACKEND_URL = environment.ANIME_API_URL;
   httpClient = inject(HttpClient);
   animes: WritableSignal<Anime[]> = signal([]);
+  findAnimes: WritableSignal<Anime[]> = signal([]);
 
   getAnimesByPage(page: number, limit = 20) {
     this.httpClient
@@ -20,8 +21,17 @@ export class AnimesService {
         `${this.BACKEND_URL}anime?page[limit]=${limit}&page[offset]=${page}`
       )
       .pipe(map(res => res.data))
-      .subscribe(animes => this.animes.set(animes))
+      .subscribe(animes => this.animes.set(animes));
+  }
+
+  getAnimesByName(name: string) {
+    return this.httpClient
+      .get<Root>(`${this.BACKEND_URL}anime?filter[text]=${name}`)
+      .pipe(map(res => res.data))
+      .subscribe(animes => this.findAnimes.set(animes));
   }
 
   getAnimes = () => this.animes.asReadonly();
+
+  getFindAnimes = () => this.findAnimes.asReadonly();
 }
