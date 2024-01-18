@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.myControl.valueChanges
-      .pipe(startWith(''), distinctUntilChanged(), debounceTime(700))
+      .pipe(startWith(''), distinctUntilChanged(), debounceTime(500))
       .subscribe(valueInput =>
         this.service.getAnimesByName(valueInput as string)
       );

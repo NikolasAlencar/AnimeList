@@ -6,13 +6,26 @@
   }">
   <div class="header">
     <h1>Animes</h1>
-    <span class="itens">
-      <span class="item">
-        <mat-icon matSuffix>filter_list</mat-icon>Mais Populares
-      </span>
-      <span class="item">
-        <mat-icon matSuffix>filter_alt</mat-icon>Filtrar
-      </span>
+    <span class="item filtrar">
+      <p
+        [ngClass]="{ background: filterList }"
+        class="subtitle"
+        (click)="filterList = !filterList">
+        <mat-icon matSuffix>filter_list</mat-icon> Mais Populares
+      </p>
+      @if (filterList) {
+        <div class="content-filtrar">
+          <mat-radio-group aria-label="Select an option">
+            @for (radio of radioGroup[0]; track $index) {
+              <mat-radio-button
+                (click)="filterBy(radio.value)"
+                [value]="radio.value"
+                >{{ radio.text }}</mat-radio-button
+              >
+            }
+          </mat-radio-group>
+        </div>
+      }
     </span>
   </div>
 
@@ -28,7 +41,7 @@
               [src]="anime.attributes.posterImage.large" />
           } @placeholder {
             A imagem será carregada em breve...
-          } @loading (minimum 1500ms){
+          } @loading (minimum 1500ms) {
             <app-skeleton></app-skeleton>
           }
           <p class="name">{{ getNameOfAnime(anime) }}</p>

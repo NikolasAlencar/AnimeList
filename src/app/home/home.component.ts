@@ -7,14 +7,15 @@ import {
 } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { AnimesService } from '../services/animes.service';
-import { JsonPipe, NgStyle } from '@angular/common';
+import { JsonPipe, NgClass, NgStyle } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ajustaGrid } from '../../assets/util/AjustaGrid';
 import { SkeletonComponent } from '../components/skeleton/skeleton.component';
 import { Anime } from '../services/models/Response';
 import { getNameOfAnime } from '../../assets/util/GetNameOfAnime';
-
+import { MatRadioModule } from '@angular/material/radio';
+import { RADIO_GROUP } from './constants/RadioGroup';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -27,6 +28,8 @@ import { getNameOfAnime } from '../../assets/util/GetNameOfAnime';
     MatIconModule,
     MatGridListModule,
     SkeletonComponent,
+    MatRadioModule,
+    NgClass,
   ],
 })
 export class HomeComponent {
@@ -37,9 +40,18 @@ export class HomeComponent {
 
   animesService = inject(AnimesService);
   animes = this.animesService.getAnimes();
+  beforeAnimes!: Anime[];
 
   screenWidth = signal(0);
   innerWidth = signal(0);
+
+  radioGroup = RADIO_GROUP;
+
+  filterList = false;
+
+  filterBy(param: string) {
+    if (!this.beforeAnimes) this.beforeAnimes = this.animes();
+  }
 
   getNameOfAnime = (anime: Anime) => getNameOfAnime(anime);
 

@@ -8,37 +8,80 @@
   justify-content: space-between;
   padding-top: 3.75rem;
 
+  .filtrar {
+    position: relative;
+
+    .content-filtrar {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 44px;
+      z-index: 1;
+      padding: 10px;
+      background: #505563b8;
+
+      p {
+        --line-height: 1.125rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-transform: none;
+      }
+
+      p:nth-of-type(2) {
+        margin-top: 20px;
+      }
+
+      mat-radio-group {
+        flex-direction: column;
+        display: flex;
+
+        mat-radio-button:hover {
+          transition:
+            background-color 0.2s ease,
+            black 0.2s ease;
+          background-color: #0000001f;
+        }
+      }
+    }
+  }
+
   h1 {
     --line-height: 2.25rem;
     font-size: 1.75rem;
     color: white;
   }
 
-  .itens {
+  .item {
     display: flex;
-    flex-direction: row;
     align-items: center;
+    font-size: 0.875rem;
+    line-height: 1.125rem;
+    color: white;
+    margin-left: 20px;
+    text-transform: uppercase;
 
-    .item {
-      display: flex;
-      align-items: center;
-      font-size: 0.875rem;
-      line-height: 1.125rem;
-      color: white;
-      margin-left: 20px;
-      text-transform: uppercase;
-
-      mat-icon {
-        margin-right: 5px;
-      }
+    mat-icon {
+      margin-right: 5px;
     }
+  }
+  .subtitle {
+    padding: 0.625rem;
+    display: flex;
+    align-items: center;
+    user-select: none;
+  }
+  .background {
+    background: #505563b8;
   }
 }
 
 .container {
   ::ng-deep {
     .mat-grid-tile-content {
-      display: inline;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
     }
   }
 
