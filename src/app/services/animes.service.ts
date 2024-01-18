@@ -31,7 +31,7 @@ export class AnimesService {
       .subscribe(animes => this.findAnimes.set(animes));
   }
 
-  getAnimes = () => this.animes.asReadonly();
+  getAnimes = () => this.animes;
 
   getFindAnimes = () => this.findAnimes.asReadonly();
 }

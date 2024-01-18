@@ -16,6 +16,7 @@ import { Anime } from '../services/models/Response';
 import { getNameOfAnime } from '../../assets/util/GetNameOfAnime';
 import { MatRadioModule } from '@angular/material/radio';
 import { RADIO_GROUP } from './constants/RadioGroup';
+import { filterAnimes } from './constants/FilterAnimes';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -50,7 +51,14 @@ export class HomeComponent {
   filterList = false;
 
   filterBy(param: string) {
-    if (!this.beforeAnimes) this.beforeAnimes = this.animes();
+    if (!this.beforeAnimes) this.beforeAnimes = Array.from(this.animes()); //ajustar função Todos
+
+    if (this.beforeAnimes.length && param !== 'todos') {
+      const filterFunction = filterAnimes(param, this.beforeAnimes);
+      this.animes.set(filterFunction());
+    } else {
+      this.animes.set(this.beforeAnimes);
+    }
   }
 
   getNameOfAnime = (anime: Anime) => getNameOfAnime(anime);
