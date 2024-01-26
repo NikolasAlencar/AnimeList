@@ -16,7 +16,8 @@ import { Anime } from '../services/models/Response';
 import { getNameOfAnime } from '../../assets/util/GetNameOfAnime';
 import { MatRadioModule } from '@angular/material/radio';
 import { RADIO_GROUP } from './constants/RadioGroup';
-import { filterAnimes } from './constants/FilterAnimes';
+import { filterAnimes } from './services/FilterAnimes';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -31,6 +32,7 @@ import { filterAnimes } from './constants/FilterAnimes';
     SkeletonComponent,
     MatRadioModule,
     NgClass,
+    RouterLink
   ],
 })
 export class HomeComponent {

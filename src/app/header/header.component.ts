@@ -11,6 +11,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { AnimesService } from '../services/animes.service';
 import { Anime } from '../services/models/Response';
 import { getNameOfAnime } from '../../assets/util/GetNameOfAnime';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -25,6 +26,7 @@ import { getNameOfAnime } from '../../assets/util/GetNameOfAnime';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
+    RouterLink
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',

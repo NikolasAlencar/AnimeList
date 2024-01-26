@@ -17,15 +17,23 @@
     <mat-icon matSuffix>find_replace</mat-icon>
     <mat-autocomplete #auto="matAutocomplete">
       @for (option of options(); track option.id) {
-        <mat-option [value]="getNameOfAnime(option)">{{ getNameOfAnime(option) }}</mat-option>
+        <mat-option
+          [routerLink]="['/anime-detail']"
+          [state]="{animeDetail: option}"
+          [value]="getNameOfAnime(option)"
+          >{{ getNameOfAnime(option) }}</mat-option
+        >
       } @empty {
-        <mat-option style="color: red;">Não foi encontrado nenhum anime com esse nome!</mat-option>
+        <mat-option style="color: red"
+          >Não foi encontrado nenhum anime com esse nome!</mat-option
+        >
       }
     </mat-autocomplete>
   </mat-form-field>
 
   <div>
     <button
+      [routerLink]="['/home']"
       mat-icon-button
       class="example-icon home-icon"
       aria-label="Example icon-button with heart icon">

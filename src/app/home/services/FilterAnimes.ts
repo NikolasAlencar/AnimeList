@@ -9,8 +9,8 @@ interface FactoryObject {
   'ordem-alfa': ReturnType<typeof filterByAlph>;
 }
 
-export const filterAnimes: any = (paramOfFilter: string, animes: Anime[]) => {
-  const factoryObject: any = {
+export const filterAnimes = (paramOfFilter: string, animes: Anime[]) => {
+  const factoryObject = {
     'mais-populares': () => filterByCrescent(animes),
     'menos-populares': () => filterByDecrescent(animes),
     'mais-recentes': () => filterByNew(animes),

@@ -33,7 +33,9 @@
     <h2>Populares</h2>
     <mat-grid-list [cols]="innerWidth()" rowHeight="22rem">
       @for (anime of animes(); track anime) {
-        <mat-grid-tile>
+        <mat-grid-tile
+          [routerLink]="['/anime-detail']"
+          [state]="{ animeDetail: anime }">
           @defer {
             <img
               class="img"
