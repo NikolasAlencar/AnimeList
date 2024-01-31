@@ -2,9 +2,39 @@
   @if (!loading) {
     <div class="secondary">
       <img [src]="animeDetail().attributes.coverImage?.small" />
-      <div>
-        <p class="name">{{ getNameOfAnime(animeDetail()) }}</p>
-        <p class="dub">Dub | Leg</p>
+      <div class="container">
+        <div>
+          <p class="name">{{ getNameOfAnime(animeDetail()) }}</p>
+          <p class="dub">Dub | Leg</p>
+
+          <div class="average-rating">
+            @for (
+              item of getArrayOfNumber();
+              track $index;
+              let first = $first
+            ) {
+              <span [ngClass]="{ 'mg-l-4': !first }">⭐</span>
+            }
+            <span class="average mg-l-4"
+              >Nota média:
+              <span class="rating">
+                {{ averageRatingOfAnime }}
+                ({{ animeDetail().attributes.userCount | kformatter }})
+              </span></span
+            >
+          </div>
+
+          <p class="desc">
+            {{ animeDetail().attributes.description }}
+          </p>
+
+          <p>categories</p>
+        </div>
+
+        <img
+          class="img"
+          loading="lazy"
+          [src]="animeDetail().attributes.posterImage.large" />
       </div>
     </div>
   } @else {

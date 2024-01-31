@@ -26,7 +26,7 @@ export interface Attributes {
   titles: Titles
   canonicalTitle: string
   abbreviatedTitles: string[]
-  averageRating: string
+  averageRating: number
   ratingFrequencies: RatingFrequencies
   userCount: number
   favoritesCount: number
