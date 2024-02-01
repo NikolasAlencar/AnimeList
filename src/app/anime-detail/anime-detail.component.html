@@ -4,7 +4,7 @@
       <img [src]="animeDetail().attributes.coverImage?.small" />
       <div class="container">
         <div>
-          <p class="name">{{ getNameOfAnime(animeDetail()) }}</p>
+          <p class="name">{{ getNameOfAnime() }}</p>
           <p class="dub">Dub | Leg</p>
 
           <div class="average-rating">
@@ -28,7 +28,11 @@
             {{ animeDetail().attributes.description }}
           </p>
 
-          <p>categories</p>
+          @for (item of genreOfAnime(); track $index; let first = $first) {
+            <span [ngClass]="{ 'mg-l-4': !first }" class="gener">{{
+              item
+            }}</span>
+          }
         </div>
 
         <img

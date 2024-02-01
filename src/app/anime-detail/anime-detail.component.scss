@@ -1,5 +1,5 @@
 .primary {
-  background: #23252b;
+  height: 100%;
 
   app-loader {
     position: fixed;
@@ -63,10 +63,11 @@
   }
 
   @media (min-width: 600px) {
+
     .container {
       display: flex;
 
-      .img{
+      .img {
         margin-left: 1rem;
       }
     }
@@ -89,6 +90,28 @@
       color: white;
       white-space: pre-line;
       margin: 12px 0;
+    }
+
+    .gener {
+      color: #dadada;
+      display: inline-block;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-transform: uppercase;
+      white-space: nowrap;
+      --line-height: 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.5rem;
+      background: #004d656e;
+      border: solid 1px #004d656e;
+      user-select: none;
+    }
+
+    .gener:hover {
+      background: #57696e6e;
+      transition: background-color 0.2s ease;
     }
   }
 }
