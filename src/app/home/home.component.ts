@@ -18,6 +18,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { RADIO_GROUP } from './constants/RadioGroup';
 import { filterAnimes } from './services/FilterAnimes';
 import { RouterLink } from '@angular/router';
+import { LoaderComponent } from '../components/loader/loader.component';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -32,13 +33,14 @@ import { RouterLink } from '@angular/router';
     SkeletonComponent,
     MatRadioModule,
     NgClass,
-    RouterLink
+    RouterLink,
+    LoaderComponent,
   ],
 })
 export class HomeComponent {
   constructor() {
     afterNextRender(() => this.onWindowResize());
-    this.animesService.getAnimesByPage(0);
+    this.animesService.getAnimesByPage(this.pagePagination);
   }
 
   animesService = inject(AnimesService);
@@ -51,6 +53,9 @@ export class HomeComponent {
   radioGroup = RADIO_GROUP;
 
   filterList = false;
+
+  loadingPagination = this.animesService.getLoadingPagination();
+  pagePagination = 0;
 
   filterBy(param: string) {
     if (!this.beforeAnimes) this.beforeAnimes = Array.from(this.animes()); //ajustar função Todos
@@ -69,5 +74,25 @@ export class HomeComponent {
   onWindowResize() {
     this.screenWidth.set(window.innerWidth / 9);
     this.innerWidth.set(ajustaGrid(window.innerWidth));
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(): void {
+    if (this.isScrolledToBottom()) {
+      this.loadingPagination.set(true);
+      this.pagePagination += 20;
+      this.animesService.getAnimesByPage(this.pagePagination);
+    }
+  }
+
+  isScrolledToBottom(): boolean {
+    const windowHeight = window.innerHeight;
+    const scrollY =
+      window.scrollY ||
+      window.pageYOffset ||
+      document.documentElement.scrollTop;
+    const documentHeight = document.documentElement.scrollHeight;
+
+    return scrollY + windowHeight >= documentHeight;
   }
 }

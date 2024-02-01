@@ -51,5 +51,11 @@
         </mat-grid-tile>
       }
     </mat-grid-list>
+
+    @if (loadingPagination()) {
+      <app-loader />
+    } @else {
+      <button class="ver-mais">Ver Mais</button>
+    }
   </div>
 </div>
