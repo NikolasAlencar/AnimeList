@@ -1,16 +1,11 @@
 import { Anime } from '../../services/models/Response';
 
 interface FactoryObject {
-  'mais-populares': ReturnType<typeof filterByCrescent>;
-  'menos-populares': ReturnType<typeof filterByDecrescent>;
-  'mais-recentes': ReturnType<typeof filterByNew>;
-  'mais-antigos': ReturnType<typeof filterByOld>;
-  'mais-longos': ReturnType<typeof filterByBiggest>;
-  'ordem-alfa': ReturnType<typeof filterByAlph>;
+  [key: string]: () => Anime[];
 }
 
 export const filterAnimes = (paramOfFilter: string, animes: Anime[]) => {
-  const factoryObject = {
+  const factoryObject: FactoryObject = {
     'mais-populares': () => filterByCrescent(animes),
     'menos-populares': () => filterByDecrescent(animes),
     'mais-recentes': () => filterByNew(animes),
@@ -18,7 +13,7 @@ export const filterAnimes = (paramOfFilter: string, animes: Anime[]) => {
     'mais-longos': () => filterByBiggest(animes),
     'ordem-alfa': () => filterByAlph(animes),
   };
-  return factoryObject[paramOfFilter as keyof FactoryObject];
+  return factoryObject[paramOfFilter];
 };
 
 // populares crescente

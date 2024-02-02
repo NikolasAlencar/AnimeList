@@ -8,10 +8,9 @@ describe('AnimeDetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AnimeDetailComponent]
-    })
-    .compileComponents();
-    
+      imports: [AnimeDetailComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(AnimeDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

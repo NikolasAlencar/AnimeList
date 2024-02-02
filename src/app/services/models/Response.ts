@@ -17,7 +17,7 @@ export interface Links {
 }
 
 export interface Attributes {
-  name: any;
+  name: string;
   createdAt: string;
   updatedAt: string;
   slug: string;

@@ -15,7 +15,7 @@ export class AnimesService {
   animes: WritableSignal<Anime[]> = signal([]);
   loadingPagination: WritableSignal<Boolean> = signal(false);
   findAnimes: WritableSignal<Anime[]> = signal([]);
-  activeGenreOfAnime: WritableSignal<MinifiedAttributes[]> = signal([]);
+  activeGenreOfAnime: WritableSignal<String[]> = signal([]);
 
   getAnimesByPage(page: number, limit = 20) {
     this.httpClient
