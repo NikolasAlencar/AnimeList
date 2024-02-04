@@ -1,0 +1,17 @@
+.primary {
+  background: white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+
+  h1 {
+    color: red;
+  }
+
+  .icon-size {
+    transform: scale(3);
+    padding: 1rem 0;
+  }
+}

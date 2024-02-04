@@ -1,0 +1,12 @@
+<div class="primary">
+  <h1>Ocorreu um erro dentro da aplicação!</h1>
+  <mat-icon class="icon-size">error_outline</mat-icon>
+  <h2>O erro foi em: {{ data.errorMessage }}</h2>
+  <button
+    mat-stroked-button
+    color="warn"
+    [routerLink]="['/home']"
+    (click)="data.closeDialog()">
+    Voltar ao inicio
+  </button>
+</div>
